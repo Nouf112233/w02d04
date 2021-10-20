@@ -55,24 +55,25 @@ const addToList=function(){
     // newLi.innerHTML=toDos[toDos.length-1];
     // document.querySelector("#navList").append(newLi);
 }
-const deleteListItem=function(e){
-    const idBut = e.target.id;
-    const parentBut =document.getElementById(idBut).parentNode;
-    console.log(parentBut.innerHTML)
-   // const indexParent=toDos.indexOf(parentBut.value);
-    //toDos.splice(indexParent,1);
-    //renderList();
+const deleteListItem=function(i){
+   // const idBut = e.target.id;
+    //const parentBut =document.getElementById(idBut).parentNode;
+    
+    //const indexParent=toDos.indexOf(parentBut.innerText);
+    toDos.splice(i,1);
+    renderList();
 
 
 }
 
-const updateListItem=function(e){
-    const idBut2 = e.target.id;
-    const parentBut2 =document.getElementById(idBut2).parentNode;
+const updateListItem=function(i){
+    //const idBut2 = e.target.id;
+    //const parentBut2 =document.getElementById(idBut2).parentNode;
     let message= prompt("please enter the text of item list");
-    const indexParent=toDos.indexOf(parentBut2.value);
+    //const indexParent=toDos.indexOf(parentBut2.innerText);
+    
     //parentBut2.innerText=message;
-    toDos.splice(indexParent,1,message);
+    toDos.splice(i,1,message);
     renderList();
 
 }
@@ -90,10 +91,11 @@ const li=document.querySelectorAll("li");
    const deleteButton=li[i].firstElementChild;
     const updateButton=li[i].lastElementChild;
 
-   deleteButton.addEventListener("click",deleteListItem);
-   updateButton.addEventListener("click",updateListItem);
+   deleteButton.addEventListener("click",()=>{deleteListItem(i)});
+   updateButton.addEventListener("click",()=>{updateListItem(i)});
 
  }
+ button1.addEventListener("click",addToList);
 
 
 
@@ -120,7 +122,7 @@ const li=document.querySelectorAll("li");
 //     // buttonLi2.addEventListener("click",updateListItem);
 // }
 // }
-//bottonList()
+
 
 //style
 body.className="load container-fluid column ";
