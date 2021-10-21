@@ -1,6 +1,5 @@
 
 
-// عندي مشكلة  وهي انه لايتفذ إيفنت للبوتن على العنصر المضاف
 const body =document.querySelector("body");
 const header=document.createElement("h1");
 const list=document.createElement("ul");
@@ -9,21 +8,16 @@ const button1=document.createElement("button");
 const li=document.querySelectorAll("li");
 const toDos=["wake up","eat breakfast","code"];
 const idText=[];
-//const idButton1=[];
-//const idButton2=[];
 
 button1.innerHTML="click me";
 button1.className ="btn btn-danger dropdown-toggle text-wight";
 header.innerHTML="Welcome";
 list.id="navList";
 
-
-
 body.append(header);
 body.append(list);
 body.append(input1);
 body.append(button1);
-
 
 //function
 
@@ -61,9 +55,7 @@ const renderList=function(){
 
         text.id=`text-${i}`
         
-       
         idText.push(text.id)
-        
         
         buttonLi.className ="btn btn-danger col ml-7px";
         buttonLi.style.marginLeft="7px";
@@ -75,7 +67,6 @@ const renderList=function(){
         liItem.append(buttonLi);
         liItem.append(buttonLi2); 
     
-        
         buttonLi.addEventListener("click",()=>{deleteListItem(i)});
         buttonLi2.addEventListener("click",()=>{updateListItem(i)});
     }
@@ -83,9 +74,7 @@ const renderList=function(){
  
 renderList();
     
-
 button1.addEventListener("click",addToList);
-
 
 //style
 body.className="load container-fluid column ";
