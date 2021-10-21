@@ -1,12 +1,13 @@
 
 
-// عندي مشكلة  وهي انه لايتفذ إيفنت للبوتن على العنصر المعمول له ابديت او ادد
+// عندي مشكلة  وهي انه لايتفذ إيفنت للبوتن على العنصر المضاف
 const body =document.querySelector("body");
 const header=document.createElement("h1");
 const list=document.createElement("ul");
 const input1=document.createElement("input");
 const button1=document.createElement("button");
 const toDos=["wake up","eat breakfast","code"];
+const idText=[];
 const idButton1=[];
 const idButton2=[];
 
@@ -25,76 +26,64 @@ body.append(button1);
 
 //function
 
-const renderList=function(){
-    for(let i=0;i<toDos.length;i++)
-    {
+const renderList=function(i){
+        
         const liItem=document.createElement("li");
-        liItem.innerHTML= toDos[i];
-        document.querySelector("#navList").append(liItem);
+        const text=document.createElement("h6");
         const buttonLi=document.createElement("button");
-        buttonLi.id=`buttonli-${i}`
-        idButton1.push(buttonLi.id)
+        const buttonLi2=document.createElement("button");
+
+        text.innerHTML= toDos[i];
         buttonLi.innerHTML="delete";
+        buttonLi2.innerHTML="update";
+
+        text.id=`text-${i}`
+        buttonLi.id=`buttonli-${i}`;
+        buttonLi2.id=`buttonli2-${i}`;
+       
+        idText.push(text.id)
+        idButton1.push(buttonLi.id);
+        idButton2.push(buttonLi2.id);
+        
         buttonLi.className ="btn btn-danger col ml-7px";
         buttonLi.style.marginLeft="7px";
-        liItem.append(buttonLi);
-        const buttonLi2=document.createElement("button");
-        buttonLi2.id=`buttonli2-${i}`;
-        idButton2.push(buttonLi2.id)
-        buttonLi2.innerHTML="update";
         buttonLi2.className ="btn btn-warning col ml-7px text-wight";
         buttonLi2.style.marginLeft="7px";
-        liItem.append(buttonLi2);
-    }
-}
 
-renderList();
+        document.querySelector("#navList").append(liItem);
+        liItem.append(text);
+        liItem.append(buttonLi);
+        liItem.append(buttonLi2);  
+    }
+
+for(let i=0;i<toDos.length;i++)
+    {
+        renderList(i);
+    }
+
+
 
 const addToList=function(){
     toDos.push(input1.value);
-    const newli=document.createElement("li");
-    newli.innerText=(input1.value);
-    list.append(newli);
-    const buttonLi=document.createElement("button");
-    let index=idButton1.length;
-    buttonLi.id=`buttonli-${index}`
-    idButton1.push(buttonLi.id)
-    buttonLi.innerHTML="delete";
-    buttonLi.className ="btn btn-danger col ml-7px";
-    buttonLi.style.marginLeft="7px";
-    newli.append(buttonLi);
-    const buttonLi2=document.createElement("button");
-    buttonLi2.id=`buttonli2-${index}`;
-    idButton2.push(buttonLi2.id)
-    buttonLi2.innerHTML="update";
-    buttonLi2.className ="btn btn-warning col ml-7px text-wight";//المارجن هنا لم يتنفذ لذلك وضعت مارجن ب سي اس اس
-    buttonLi2.style.marginLeft="7px";
-    newli.append(buttonLi2);
+    let i=toDos.length-1;
+    renderList(i);
 
-}
+ }
 const deleteListItem=function(i){
     toDos.splice(i,1);
+    idText.splice(i,1);
+    idButton1.splice(i,1);
+    idButton2.splice(i,1);
     li[i].remove();
 }
 
 const updateListItem=function(i){
+    
     let message= prompt("please enter the text of item list");
     toDos.splice(i,1,message);
-    li[i].innerText=message;
-    const buttonLi=document.createElement("button");
-    buttonLi.id=`buttonli-${i}`
-    idButton1.push(buttonLi.id)
-    buttonLi.innerHTML="delete";
-    buttonLi.className ="btn btn-danger col ml-7px";
-    buttonLi.style.marginLeft="7px";
-    li[i].append(buttonLi);
-    const buttonLi2=document.createElement("button");
-    buttonLi2.id=`buttonli2-${i}`;
-    idButton2.push(buttonLi2.id)
-    buttonLi2.innerHTML="update";
-    buttonLi2.className ="btn btn-warning col ml-7px text-wight";
-    buttonLi2.style.marginLeft="7px";
-    li[i].append(buttonLi2);
+    let id =idText[i];
+    const text=document.getElementById(id);
+    text.innerHTML=message;
 
 }
 
