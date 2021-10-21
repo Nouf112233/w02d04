@@ -26,10 +26,28 @@ body.append(button1);
 
 //function
 
+const deleteListItem=function(i){
+    toDos.splice(i,1);
+    idText.splice(i,1);
+    idButton1.splice(i,1);
+    idButton2.splice(i,1);
+    li[i].remove();
+}
+
+const updateListItem=function(i){
+    
+    let message= prompt("please enter the text of item list");
+    toDos.splice(i,1,message);
+    let id =idText[i];
+    const text=document.getElementById(id);
+    text.innerHTML=message;
+
+}
+
 const renderList=function(i){
         
         const liItem=document.createElement("li");
-        const text=document.createElement("h6");
+        const text=document.createElement("h4");
         const buttonLi=document.createElement("button");
         const buttonLi2=document.createElement("button");
 
@@ -53,7 +71,10 @@ const renderList=function(i){
         document.querySelector("#navList").append(liItem);
         liItem.append(text);
         liItem.append(buttonLi);
-        liItem.append(buttonLi2);  
+        liItem.append(buttonLi2); 
+        
+        buttonLi.addEventListener("click",()=>{deleteListItem(i)});
+        buttonLi2.addEventListener("click",()=>{updateListItem(i)});
     }
 
 for(let i=0;i<toDos.length;i++)
@@ -69,39 +90,18 @@ const addToList=function(){
     renderList(i);
 
  }
-const deleteListItem=function(i){
-    toDos.splice(i,1);
-    idText.splice(i,1);
-    idButton1.splice(i,1);
-    idButton2.splice(i,1);
-    li[i].remove();
-}
-
-const updateListItem=function(i){
-    
-    let message= prompt("please enter the text of item list");
-    toDos.splice(i,1,message);
-    let id =idText[i];
-    const text=document.getElementById(id);
-    text.innerHTML=message;
-
-}
-
-
-
-
 
 const li=document.querySelectorAll("li");
 
-  for(let i=0;i<idButton1.length;i++)
-  {
+//   for(let i=0;i<toDos.length;i++)
+//   {
+//       renderList(i);
+//       let b1=idButton1[i];
+//       let b2=idButton2[i];
+//       document.getElementById(b1).addEventListener("click",()=>{deleteListItem(i)});
+//       document.getElementById(b2).addEventListener("click",()=>{updateListItem(i)});
 
-      let b1=idButton1[i];
-      let b2=idButton2[i];
-      document.getElementById(b1).addEventListener("click",()=>{deleteListItem(i)});
-      document.getElementById(b2).addEventListener("click",()=>{updateListItem(i)});
-
-  }
+//   }
  button1.addEventListener("click",addToList);
 
 
